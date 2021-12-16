@@ -1,0 +1,45 @@
+a. API REST
+    i. ¿Qué es, cómo funciona y cuáles son sus ventajas en el desarrollo de
+    proyectos?
+        Las API REST son una interfaz que permite que dispositivos se comuniquen
+        con servicios web con un protocolo especifico (RESTful), cuya principal
+        funcionalidad es la de compartir informacion y obtener datos.
+        Algunas de sus ventajas son:
+        - Permite que muchos dispositivos de distinto tipo consuman la misma informacion
+        - Se puede decidir por usar una API interna/privada como backend y manejar la 
+        informacion en el frontend con frameworks (SPAs, PWAs)
+        - Uno no se tiene que preocupar por como esta implementada siempre y cuando
+        se respete la documentacion, de esta manera uno puede desarrollar aplicaciones
+        que utilicen mas de un servicio REST al mismo tiempo
+        - Quienes desarrollan la API se encargan de mejorar su seguridad, por lo tanto
+        quienes la usan pueden confiar de que no va a haber vulnerabilidades
+
+        ii. Proponga nuevas funcionalidades al sistema anterior en donde
+        puedan aprovecharse estás ventajas. Justifique
+        - Una funcionalidad importante seria la posibilidad de que un servicio REST
+        dado un id de Cliente devuelva una respuesta json donde tenga toda la informacion
+        necesaria para renderizar el resumen de cuenta en vez de multiples llamados a la DB.
+
+        - Podria existir un catalogo de recompensas por los kilometros acumulados
+        que podria ser devuelta en formato json.
+
+    b. Describa y de algunos ejemplos de cómo se utilizan siguientes conceptos:
+        i. Server Side Rendering
+            Server Side Rendering es una tecnica por la cual se entrega al cliente una pagina
+            (HTML+JS+CSS) completamente renderizada (incluyendo el procesamiento de la informacion)
+            por el servidor, el cual se encarga de procesar y dibujar cada pagina.
+            Ejemplos: Paginas renderizadas con tecnologia de backend como PHP (frameworks y template engines),
+            NodeJS (NEXT.js, NUXT, SvelteKit), Java Spring.
+        
+        ii. HTTP Status codes
+            Son respuestas estandarizadas que nos dan informacion acerca del resultado
+            de nuestras peticiones (no es exclusivo de API REST).
+            Ej: Las encontramos en los headers de nuestras consultas a una API REST y nos 
+            indica si lo que ejecutamos fue exitoso, incorrecto, hubo un error por parte
+            del servidor, etc.
+
+        iii. Sessiones de usuarios
+            Las sesiones de usuario nos ayudan para corroborar la identidad o el estado
+            de login de un Usuario, las podemos encontrar del lado del cliente (cookies)
+            o del lado del servidor (ej: $_SESSION en PHP). Nos conviene guardarlas de forma segura 
+            ya que nos permite, por ejemplo, validar los permisos de un usuario.
