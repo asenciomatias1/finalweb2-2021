@@ -41,9 +41,9 @@ ApiActividadController.php
 getActividadClientePeriodo();
 
 F. Como cliente quiero poder dar de baja una tarjeta
-(DELETE) /api/tarjetas/clientes/:ID
+(DELETE) /api/tarjetas/:ID
 ApiTarjetasController.php
-deleteTarjetaCliente();
+deleteTarjeta();
 
 c) Implemente el controlador de los puntos C, E y F
-Implementado en codigo.
+Implementado en codigo

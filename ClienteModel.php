@@ -26,4 +26,10 @@ class ClienteModel {
         $query->execute([$dni]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
+
+    public function getClientePorID($id){
+        $query = $this->db->prepare("SELECT * FROM cliente WHERE id = ?");
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
 }
