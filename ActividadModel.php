@@ -20,4 +20,24 @@ class ActividadModel {
                                     VALUES (?,?,?,?)");
         $query->execute([$kms, $fecha, $tipo_operacion, $id_cliente]);
     }
+
+    public function getKilometrosSumados($id_cliente){
+        $query = $this->db->prepare("SELECT COUNT(kms) AS kms_sumados 
+            FROM actividad WHERE id_cliente = ? AND tipo_operacion = 2");
+        $query->execute([$id_cliente]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function getKilometrosCanjeados($id_cliente){
+        $query = $this->db->prepare("SELECT COUNT(kms) AS kms_sumados 
+            FROM actividad WHERE id_cliente = ? AND tipo_operacion = 1");
+        $query->execute([$id_cliente]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function getActividadesCliente($id_cliente){
+        $query = $this->db->prepare("SELECT * FROM actividad WHERE id_cliente = ?");
+        $query->execute([$id_cliente]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
 }

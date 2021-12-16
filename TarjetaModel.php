@@ -20,4 +20,10 @@ class TarjetaModel {
                                     VALUES (?,?,?,?,?)");
         $query->execute([$fecha_alta, $nro_tarjeta, $fecha_vencimiento, $tipo_tarjeta, $id_cliente]);
     }
+
+    public function getTarjetasCliente($id_cliente){
+        $query = $this->db->prepare("SELECT * FROM tarjeta WHERE id_cliente = ?");
+        $query->execute([$id_cliente]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
 }

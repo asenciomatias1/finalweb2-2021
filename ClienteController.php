@@ -69,5 +69,21 @@ class ClienteController {
         }
     }
 
-    
+    public function showResumenCliente(){
+        $dniCliente = $_POST["dni"];
+        $cliente = $this->clienteModel->getClientePorDni($dniCliente);
+
+        if ($cliente){
+            $nombreCliente = $cliente->nombre;
+            $kmsSumados = $this->actividadModel->getKilometrosSumados($cliente->id)->kms_sumados;
+            $kmsCanjeados = $this->actividadModel->getKilometrosCanjeados($cliente->id)->kms_canjeados;
+            $kmsAcumulados = $kmsSumados - $kmsCanjeados;
+            $actividades = $this->actividadModel->getActividadesCliente($cliente->id);
+            $tarjetas = $this->tarjetaModel->getTarjetasCliente($cliente->id);
+
+            $this->view->showResumenCliente($nombreCliente, $kmsAcumulados, $actividades, $tarjetas);
+        }else {
+            $this->view->showMensaje("No existe un cliente con ese DNI");
+        }
+    }
 }
