@@ -22,10 +22,12 @@ class ClienteController {
         if (isset($array)){
             foreach ($array as $var) {
                 // Quiero $var === 0
-                if ($var !== "0" || empty($var)){
+                if ($var !== 0 && empty($var)){
                     return false;
                 }
             }
+
+            return true;
         }
 
         return false;
@@ -84,6 +86,27 @@ class ClienteController {
             $this->view->showResumenCliente($nombreCliente, $kmsAcumulados, $actividades, $tarjetas);
         }else {
             $this->view->showMensaje("No existe un cliente con ese DNI");
+        }
+    }
+
+    public function transferenciaRapida(){
+        $this->authHelper->verifyLogin();
+        $clienteOriginario = $this->clienteModel->getClientePorDni($_POST["dniOriginario"]);
+        $montoKms = $_POST["montoKms"];
+        $clienteDestinatario = $this->clienteModel->getClientePorDni($_POST["dniDestinatario"]);
+
+        if ($clienteDestinatario){
+            $kmsSumados = $this->actividadModel->getKilometrosSumados($clienteOriginario->id)->kms_sumados;
+            $kmsCanjeados = $this->actividadModel->getKilometrosCanjeados($clienteOriginario->id)->kms_canjeados;
+            $kmsAcumuladosOriginario = $kmsSumados - $kmsCanjeados;
+
+            if ($kmsAcumuladosOriginario >= $montoKms){
+                $this->actividadModel->addActividad($montoKms, $_POST["fecha"], 2, $clienteDestinatario->id);
+            }else {
+                $this->view->showMensaje("No tenes kilometros suficientes para realizar esta transferencia");
+            }
+        }else {
+            $this->view->showMensaje("El cliente destinatario no existe");
         }
     }
 }
