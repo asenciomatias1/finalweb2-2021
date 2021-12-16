@@ -68,4 +68,6 @@ class ClienteController {
             $this->view->showMensaje("No tenes permiso de realizar esta accion");
         }
     }
+
+    
 }
